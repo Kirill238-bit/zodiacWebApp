@@ -34,7 +34,8 @@ const ZodiacDescription = () => {
       if(data){
         setIsLoading(true)
         API.description.get(data.nameEn,lang).then((res)=>{
-          //setDescription(res.horoscope)
+          window.Telegram.WebApp.HapticFeedback.notificationOccurred('success')
+          setDescription(res.horoscope)
           setIsLoading(false)
         }).catch(()=>setIsLoading(false))
       }
