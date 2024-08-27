@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import ZodiacList from './components/ZodiacList';
-import { useSearchParams } from 'react-router-dom';
 import { $tgInfo, changeLanguage, darkThemeDisabler, darkThemeEnabler, desktopEnabler } from './store/tgStore';
 import ZodiacDescription from './components/ZodiacDescription';
 import { GlobalStyle } from './utils/GlobalStyle';
@@ -23,12 +22,11 @@ const Wrapper = styled.div<{dark?:string, light?: string}>`
   overflow-x:hidden;
 `;
 function App() {
-  const [params] = useSearchParams();  
   const { dark } = useUnit($tgInfo);
 
 
   useEffect(() => {
-    const lang = window.Telegram.WebApp.initDataUnSafe.user.language_code
+    const lang = window.Telegram.WebApp.initDataUnSafe.user
     console.log(lang)
     lang.language_code==='ru' ? changeLanguage('Ru') : changeLanguage('En');
     
