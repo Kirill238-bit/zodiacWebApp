@@ -1,4 +1,4 @@
-import { Popup, Skeleton } from 'antd-mobile'
+import { ErrorBlock, Popup, Skeleton } from 'antd-mobile'
 import { useUnit } from 'effector-react'
 import { $zodiacDescription, setZodiacDescriptionProps } from '../store/detailsStore'
 import styled from 'styled-components'
@@ -34,9 +34,9 @@ const ZodiacDescription = () => {
       if(data){
         setIsLoading(true)
         API.description.get(data.nameEn,lang).then((res)=>{
-          setDescription(res.horoscope)
+          //setDescription(res.horoscope)
           setIsLoading(false)
-        })
+        }).catch(()=>setIsLoading(false))
       }
     },[data])
 
@@ -66,7 +66,16 @@ const ZodiacDescription = () => {
         onTouchStart={handleTouchStart} 
         onTouchEnd={handleTouchEnd}
         >
-          {isLoading ? <Skeleton.Paragraph lineCount={5} animated /> : <h3>{description}</h3>}
+          {isLoading ? 
+            <Skeleton.Paragraph lineCount={5} animated />
+          : !description ? 
+            <ErrorBlock 
+              title='Произошла ошибка'
+              description=''
+              />
+          :
+            <h3>{description}</h3>
+          }
         </Wrapper>
     </Popup>
   )

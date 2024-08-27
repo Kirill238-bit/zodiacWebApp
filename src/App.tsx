@@ -26,9 +26,6 @@ function App() {
 
 
   useEffect(() => {
-    const lang = window.Telegram.WebApp.initDataUnsafe.user
-    console.log(lang)
-    lang.language_code==='ru' ? changeLanguage('Ru') : changeLanguage('En');
     
       if(window.Telegram) {
         window.Telegram.WebApp.expand();
@@ -39,6 +36,10 @@ function App() {
         }else{
           darkThemeDisabler();
         }
+
+        const lang = window.Telegram.WebApp.initDataUnsafe.user || {language_code:'ru'}
+        console.log(lang)
+        lang.language_code==='ru' ? changeLanguage('Ru') : changeLanguage('En');
 
         window.Telegram.WebApp.onEvent('themeChanged', () => {
           if (window.Telegram.WebApp.colorScheme === "dark") {
