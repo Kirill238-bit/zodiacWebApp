@@ -26,7 +26,7 @@ function App() {
 
 
   useEffect(() => {
-    const lang = window.Telegram.WebApp.initDataUnSafe.user
+    const lang = window.Telegram.WebApp.initDataUnsafe.user
     console.log(lang)
     lang.language_code==='ru' ? changeLanguage('Ru') : changeLanguage('En');
     
