@@ -28,7 +28,8 @@ function App() {
 
 
   useEffect(() => {
-    const lang = params.get('language_code') || "Ru"
+    const lang = window.Telegram.WebApp.WebAppUser.language_code
+    console.log(lang)
     lang==='ru' ? changeLanguage('Ru') : changeLanguage('En');
     
       if(window.Telegram) {
